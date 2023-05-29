@@ -19,3 +19,19 @@ export interface Signup {
   isShuttle: boolean;
   isVerified: boolean;
 }
+
+export interface PostSession {
+  name: string;
+  place: string;
+  joinLimit: number;
+  isParking: boolean;
+  isShuttle: boolean;
+}
+
+export interface PatchSession {
+  name: string;
+  place: string;
+  joinLimit: number;
+  isParking: boolean;
+  isShuttle: boolean;
+}
