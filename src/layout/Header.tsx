@@ -9,7 +9,9 @@ const menuItem: MenuItemType[] = [
 ];
 
 const Header: React.FC = () => {
-  return <Menu items={menuItem} mode="horizontal" />;
+  return (
+    <Menu items={menuItem} defaultSelectedKeys={["1"]} mode="horizontal" />
+  );
 };
 
 export default Header;

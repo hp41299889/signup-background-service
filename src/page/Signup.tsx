@@ -75,7 +75,6 @@ const column: ColumnsType<Column> = [
 
 const Signup: React.FC = () => {
   const [signups, setSignups] = useState<Column[]>([]);
-
   const exportExcel = () => {
     const dataToExport = signups.map((signup) => {
       return {
