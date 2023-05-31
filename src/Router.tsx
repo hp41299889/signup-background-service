@@ -6,7 +6,7 @@ import Login from "./page/Login";
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/login" element={<Login />}></Route>
         <Route element={<Base />}>
