@@ -1,5 +1,5 @@
 FROM nginx:stable-alpine
 WORKDIR /app
-COPY /build /usr/share/nginx/html
+COPY /build /var/www/
 COPY /nginx/default.conf /etc/nginx/conf.d/default.conf
-EXPOSE 3000
+EXPOSE 80

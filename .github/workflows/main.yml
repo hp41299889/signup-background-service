@@ -32,6 +32,7 @@ jobs:
       - name: Build
         run: yarn build
         env:
+          PUBLIC_URL: ${{secrets.PUBLIC_URL}}
           REACT_APP_SIGNUP_API_BASE_URL: ${{ secrets.REACT_APP_BACKGROUND_SERVICE_API_BASE_URL }}
 
       - name: Set up Docker Buildx
