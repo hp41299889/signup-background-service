@@ -13,6 +13,7 @@ interface Column {
   isParking: boolean;
   isShuttle: boolean;
   isVerified: boolean;
+  isCheckin: boolean;
   session: Session;
 }
 
@@ -71,6 +72,12 @@ const column: ColumnsType<Column> = [
         <Typography.Text type="danger">否</Typography.Text>
       ),
   },
+  {
+    title: "是否報到",
+    key: "isCheckin",
+    dataIndex: "isCheckin",
+    render: (value: boolean) => (value === true ? "是" : "否"),
+  },
 ];
 
 const Signup: React.FC = () => {
@@ -87,6 +94,7 @@ const Signup: React.FC = () => {
         是否停車: signup.isParking,
         是否接駁: signup.isShuttle,
         是否驗證: signup.isVerified,
+        是否報到: signup.isCheckin,
       };
     });
     const ws = utils.json_to_sheet(dataToExport);

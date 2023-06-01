@@ -18,6 +18,7 @@ export interface Signup {
   isParking: boolean;
   isShuttle: boolean;
   isVerified: boolean;
+  isCheckin: boolean;
 }
 
 export interface PostSession {
