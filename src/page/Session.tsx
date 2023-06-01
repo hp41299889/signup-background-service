@@ -388,7 +388,10 @@ const Session: React.FC = () => {
                     }
                     setIsAdding(true);
                     const newSession = {
-                      id: sessions[sessions.length - 1].id + 1,
+                      id:
+                        sessions.length > 0
+                          ? sessions[sessions.length - 1].id + 1
+                          : 1,
                       name: "",
                       place: "",
                       joinLimit: "",
