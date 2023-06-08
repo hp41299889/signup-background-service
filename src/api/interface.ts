@@ -21,6 +21,11 @@ export interface Signup {
   isCheckin: boolean;
 }
 
+export interface PostLogin {
+  username: string;
+  password: string;
+}
+
 export interface PostSession {
   name: string;
   place: string;

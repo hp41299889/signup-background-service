@@ -3,6 +3,7 @@ import axios, { AxiosInstance } from "axios";
 const request = (baseUrl = ""): AxiosInstance => {
   const instance = axios.create({
     baseURL: baseUrl,
+    withCredentials: true,
   });
   return instance;
 };
