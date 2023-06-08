@@ -9,6 +9,7 @@ import {
   Table,
   Typography,
 } from "antd";
+import { useNavigate } from "react-router-dom";
 import {
   deleteSessionById,
   getSessions,
@@ -48,6 +49,7 @@ interface FormValues {
 
 const Session: React.FC = () => {
   const [form] = useForm();
+  const navigate = useNavigate();
   const [sessions, setSesstions] = useState<Column[]>([]);
   const [editingRow, setEditingRow] = useState<number | null>(null);
   const [isAdding, setIsAdding] = useState<boolean>(false);
@@ -292,6 +294,11 @@ const Session: React.FC = () => {
                                   if ((res.data.status = "success")) {
                                     setSesstions(res.data.data);
                                   }
+                                  if (res.data.status === "failed") {
+                                    if (res.data.data === "Auth failed") {
+                                      navigate("/login");
+                                    }
+                                  }
                                 })
                                 .catch((err) => {
                                   console.error(err);
@@ -299,6 +306,15 @@ const Session: React.FC = () => {
                             })
                             .catch((err) => {
                               console.error(err);
+                              if (err.response.data.status === "failed") {
+                                if (err.response.data.data === "Auth failed") {
+                                  if (
+                                    err.response.data.message === "no session"
+                                  ) {
+                                    navigate("/login");
+                                  }
+                                }
+                              }
                             });
                         },
                       });
@@ -333,6 +349,13 @@ const Session: React.FC = () => {
           }
         })
         .catch((err) => {
+          if (err.response.data.status === "failed") {
+            if (err.response.data.data === "Auth failed") {
+              if (err.response.data.message === "no session") {
+                navigate("/login");
+              }
+            }
+          }
           console.error(err);
         });
     } else {
@@ -351,6 +374,13 @@ const Session: React.FC = () => {
           }
         })
         .catch((err) => {
+          if (err.response.data.status === "failed") {
+            if (err.response.data.data === "Auth failed") {
+              if (err.response.data.message === "no session") {
+                navigate("/login");
+              }
+            }
+          }
           console.error(err);
         });
     }

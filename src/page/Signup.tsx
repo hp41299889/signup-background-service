@@ -4,6 +4,7 @@ import { utils, writeFileXLSX } from "xlsx";
 import { ColumnsType } from "antd/es/table";
 import { getSignups } from "src/api/background";
 import { Session } from "src/api/interface";
+import { useNavigate } from "react-router-dom";
 interface Column {
   id: number;
   name: string;
@@ -81,6 +82,7 @@ const column: ColumnsType<Column> = [
 ];
 
 const Signup: React.FC = () => {
+  const navigate = useNavigate();
   const [signups, setSignups] = useState<Column[]>([]);
   const exportExcel = () => {
     const dataToExport = signups.map((signup) => {
@@ -106,15 +108,20 @@ const Signup: React.FC = () => {
   useEffect(() => {
     getSignups()
       .then((res) => {
-        console.log(res);
         if (res.data.status === "success") {
           setSignups(res.data.data);
         }
       })
       .catch((err) => {
-        console.error(err);
+        if (err.response.data.status === "failed") {
+          if (err.response.data.data === "Auth failed") {
+            if (err.response.data.message === "no session") {
+              navigate("/login");
+            }
+          }
+        }
       });
-  }, []);
+  }, [navigate]);
 
   return (
     <Row>
