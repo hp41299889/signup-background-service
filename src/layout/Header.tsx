@@ -15,7 +15,6 @@ const Header: React.FC = () => {
   useEffect(() => {
     getUser()
       .then((res) => {
-        console.log(res);
         setUser(res.data.data);
       })
       .catch((err) => {
