@@ -32,6 +32,7 @@ interface Column {
   name: string;
   place: string;
   joinLimit: number | string;
+  activityDate: Date | string;
   isParking: boolean;
   isShuttle: boolean;
   createdAt: Date | null;
@@ -43,6 +44,7 @@ interface FormValues {
   name: string;
   place: string;
   joinLimit: number;
+  activityDate: string | Date;
   isParking: boolean;
   isShuttle: boolean;
 }
@@ -53,6 +55,7 @@ const Session: React.FC = () => {
   const [sessions, setSesstions] = useState<Column[]>([]);
   const [editingRow, setEditingRow] = useState<number | null>(null);
   const [isAdding, setIsAdding] = useState<boolean>(false);
+  console.log(sessions);
 
   const column: ColumnsType<Column> = [
     {
@@ -100,7 +103,7 @@ const Session: React.FC = () => {
     },
     {
       title: "場次地點",
-      key: "plcae",
+      key: "place",
       dataIndex: "place",
       width: 150,
       render: (text, record) => {
@@ -116,6 +119,32 @@ const Session: React.FC = () => {
               </Item>
             ) : (
               text
+            )}
+          </>
+        );
+      },
+    },
+    {
+      title: "場次日期",
+      key: "activityDate",
+      dataIndex: "activityDate",
+      width: 150,
+      render: (text, record) => {
+        return (
+          <>
+            {editingRow === record.id ? (
+              <Item
+                name="activityDate"
+                rules={[{ required: true, message: "場次日期不能為空" }]}
+                style={{ marginBottom: "0" }}
+              >
+                <Input style={{ width: "150px" }} />
+              </Item>
+            ) : (
+              dayjs(text)
+                .utc(true)
+                .tz(dayjs.tz.guess())
+                .format("YYYY-MM-DD HH:mm:ss")
             )}
           </>
         );
@@ -425,6 +454,7 @@ const Session: React.FC = () => {
                       name: "",
                       place: "",
                       joinLimit: "",
+                      activityDate: "",
                       isParking: false,
                       isShuttle: false,
                       createdAt: null,
