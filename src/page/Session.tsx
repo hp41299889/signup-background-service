@@ -55,7 +55,6 @@ const Session: React.FC = () => {
   const [sessions, setSesstions] = useState<Column[]>([]);
   const [editingRow, setEditingRow] = useState<number | null>(null);
   const [isAdding, setIsAdding] = useState<boolean>(false);
-  console.log(sessions);
 
   const column: ColumnsType<Column> = [
     {
@@ -141,10 +140,7 @@ const Session: React.FC = () => {
                 <Input style={{ width: "150px" }} />
               </Item>
             ) : (
-              dayjs(text)
-                .utc(true)
-                .tz(dayjs.tz.guess())
-                .format("YYYY-MM-DD HH:mm:ss")
+              dayjs(text).format("YYYY-MM-DD HH:mm:ss")
             )}
           </>
         );
